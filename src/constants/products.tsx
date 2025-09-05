@@ -1,5 +1,17 @@
+import type { ReactNode } from "react";
 
-export const products = [
+export type Product = {
+  href: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  images: string[];
+  stack: string[];
+  slug: string;
+  content: ReactNode;
+};
+
+export const products: Product[] = [
   {
     href: "https://github.com/Aditey1908/DocuSage", // Replace with actual DocuSage link if different
     title: "DocuSage – The Oracle of All Files",
