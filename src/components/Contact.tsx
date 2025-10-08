@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { trackEvent } from '@/lib/analytics';
 
 const defaultFormState = {
   name: {
@@ -37,8 +38,12 @@ export const Contact = () => {
       if (response.ok) {
         setStatus("Message sent successfully!");
         setFormData(defaultFormState);
+        // Track successful form submission
+        trackEvent('contact_form_submission', { status: 'success' });
       } else {
         setStatus("Failed to send message. Please try again later.");
+        // Track failed form submission
+        trackEvent('contact_form_submission', { status: 'failed' });
       }
     } catch (error) {
       setStatus("Failed to send message. Please try again later.");
@@ -98,6 +103,7 @@ export const Contact = () => {
       <button
         className="w-full px-2 py-2 mt-4 bg-neutral-100 rounded-md font-bold text-neutral-500"
         type="submit"
+        onClick={() => trackEvent('button_click', { button: 'contact_submit' })}
       >
         Submit{" "}
       </button>
